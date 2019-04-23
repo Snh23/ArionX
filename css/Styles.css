@@ -1,0 +1,37 @@
+body{ /*si es un elemento propiamente de HTML se coloca el nombre como tal*/
+background-image: url("../img/folk-pattern.png");
+}
+
+.jumbotron{/*si se trata de una clase se antecede con un punto(.)*/
+    background-color: rgb(93, 178, 231);
+    color: white;
+}
+
+.panel-heading {
+    background-color: rgb(93, 178, 231) !important;
+    color: white !important;
+}
+
+.panel-body{
+    color: grey !important; /* usamos la terminacion !important para que tome este estilo y no el de bootstrap*/
+}
+
+.navbar {
+    background-color: black; /*color de fondo para la barra de navegacion*/
+}
+
+.navbar-brand:link, .navbar-brand:visited {/*es importante poner las cuatro caracteristicas de un encale para que funcione(link, visited, hover y active)*/
+    color: deepskyblue !important;
+}
+
+.navbar-brand:hover, .navbar-brand:active {
+    color: white !important;
+}
+
+#navbar li a:link, #navbar li a:visited {/*para hacer referencia a un id se utiliza la almohadilla (#)*/
+color: white !important;
+}
+
+#navbar li a:hover, #navbar li a:active {
+    color: deepskyblue !important;
+}
