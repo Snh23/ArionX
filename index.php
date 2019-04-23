@@ -92,9 +92,12 @@
                                     <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Ultimas Entradas
                                 </div>
                                 <div class="panel-body">
-                                    <div class="form-group">
-                                        <input type="search" class="form-control" placeholder="Aun No Tienes Ninguna Entrada">
-                                    </div>
+                                <?php
+                                include_once 'app/conexion.inc.php';
+                                /*Conexion ::abrir_con(); /*probamos si la conexion es correcta
+                                Conexion ::cerrar_con()*/
+                                ?>
+                                    <p>Aun no hay ningun comentario</p>
                                 </div>
                             </div>
                         </div>
