@@ -16,6 +16,7 @@ class RepositorioUsuario {
                             $fila['id'],
                             $fila['nombre'],
                             $fila['apellidos'],
+                            $fila['usuario'],
                             $fila['email'],
                             $fila['password'],
                             $fila['fecha_reg'],

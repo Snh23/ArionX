@@ -4,15 +4,17 @@ class Usuario {
     private $id;
     private $nombre;
     private $apellidos;
+    private $usuario;
     private $email;
     private $password;
     private $fecha_reg;
     private $activo;
 
-    public function __construct($id, $nombre, $apellidos, $email, $password, $fecha_reg, $activo) {
+    public function __construct($id, $nombre, $apellidos, $usuario, $email, $password, $fecha_reg, $activo) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
+        $this->usuario = $usuario;
         $this->email = $email;
         $this->password = $password;
         $this->fecha_reg = $fecha_reg;
@@ -27,6 +29,9 @@ class Usuario {
     }
     public function get_apellidos(){
         return $this->apellidos;
+    }
+    public function get_usuario(){
+        return $this->usuario;
     }
     public function get_email(){
         return $this->email;
@@ -50,6 +55,9 @@ class Usuario {
     }
     public function state_apellidos(){
         return $this->apellidos;
+    }
+    public function state_usuario(){
+        return $this->usuario;
     }
     public function state_email(){
         return $this->email;
