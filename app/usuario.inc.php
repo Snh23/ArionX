@@ -14,7 +14,7 @@ class Usuario {
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
         $this->email = $email;
-        $this->passsword = $password;
+        $this->password = $password;
         $this->fecha_reg = $fecha_reg;
         $this->activo = $activo;
     }
