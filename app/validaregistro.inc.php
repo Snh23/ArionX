@@ -1,4 +1,5 @@
 <?php
+include_once 'repusuario.inc.php';
 class ValidaRegistro{
     private $aviso_ini;
     private $aviso_fin;
@@ -7,6 +8,7 @@ class ValidaRegistro{
     private $apellidos;
     private $usuario;
     private $email;
+    private $clave;
 
     private $error_nombre;
     private $error_apellidos;
@@ -24,6 +26,7 @@ class ValidaRegistro{
         $this ->apellidos = "";
         $this ->usuario = "";
         $this ->email = "";
+        $this ->clave ="";
 
         $this ->error_nombre = $this -> valida_nom($nombre);
         $this ->error_apellidos = $this -> valida_ape($apellidos);
@@ -31,6 +34,9 @@ class ValidaRegistro{
         $this ->error_email = $this -> valida_email($email);
         $this ->error_clave1 = $this -> valida_clave1($clave1);
         $this ->error_clave2 = $this -> valida_clave2($clave1,$clave2);
+        if($this ->error_clave1 === "" && $this ->error_clave2 === ""){
+            $this ->clave = $clave1;
+        }
     }
 // creamos una funcion para saber si hay datos en las cajas de texto
     private function var_iniciada($var){
@@ -132,6 +138,9 @@ class ValidaRegistro{
     }
     public function obtener_email(){
         return $this ->email;
+    }
+    public function obtener_clave(){
+        return $this ->clave;
     }
 //con las sig funciones obtenemos los errores de las validaciones anteriores
     public function obtener_error_nom(){

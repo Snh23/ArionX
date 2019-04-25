@@ -52,4 +52,24 @@ class RepositorioUsuario
         }
         return $totalusu; /*regresamos el valor obtenido, en este caso $totalusu tiene el dato guardado del campo total*/
     }
+
+    public static function insertar_usuarios($conexion, $usuario){
+        $usuario_inserta = false;
+
+        if(isset($conexion)){
+            try{
+                $sql = "INSERT INTO usuarios (nombre, apellidos, usuario, email, password, fecha_reg, activo) VALUES (:nombre, :apellidos, :usuario, :email, :password, NOW(), 0)";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia -> bindParam(':nombre', $usuario->get_nombre(), PDO::PARAM_STR);
+                $sentencia -> bindParam(':apellidos', $usuario ->get_apellidos(), PDO::PARAM_STR);
+                $sentencia -> bindParam(':usuario', $usuario ->get_usuario(), PDO::PARAM_STR);
+                $sentencia -> bindParam(':email', $usuario ->get_email(), PDO::PARAM_STR);
+                $sentencia -> bindParam(':password', $usuario ->get_password(), PDO::PARAM_STR);
+                $usuario_inserta = $sentencia -> execute();
+            }catch(PDOException $ex){
+                print "ERROR" . $ex ->getMessage();
+            }
+        }
+        return $usuario_inserta;
+    }
 }

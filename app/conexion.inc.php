@@ -6,7 +6,7 @@ class Conexion {
         if (!isset(self::$conexion)){
             try{
                 include_once 'config.inc.php';
-                self::$conexion = new PDO("mysql:host=$nombre_serv;dbname=$nombre_bd", $nombre_usu, $pass_serv);/*es necesario evitar espacios en la primera parte de la conexion host y bdname*/
+                self::$conexion = new PDO('mysql:host='.NOMBRE_SERVIDOR.';dbname='.NOMBRE_BD, NOMBRE_USU, PASS_SERV);/*es necesario evitar espacios en la primera parte de la conexion host y bdname*/
                 self::$conexion -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);/*configurando modo de errores, para que cada que pase un error se lanzara una excepcion y podremos ver que paso*/
                 self::$conexion -> exec("SET CHARACTER SET utf8");/*se llama a la base de datos en modo de lectura universal */
                 /*print"CONEXION ABIERTA" . "<br>";*/
