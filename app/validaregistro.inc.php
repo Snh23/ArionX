@@ -1,4 +1,5 @@
 <?php
+include_once 'conexion.inc.php';
 include_once 'repusuario.inc.php';
 class ValidaRegistro{
     private $aviso_ini;
@@ -17,7 +18,7 @@ class ValidaRegistro{
     private $error_clave1;
     private $error_clave2;
 
-    public function __construct($nombre, $apellidos, $usuario, $email, $clave1, $clave2)
+    public function __construct($nombre, $apellidos, $usuario, $email, $clave1, $clave2, $conexion)
     {
         $this ->aviso_ini="<br><div class='alert alert-danger' role='alert'>";//variable para colocoar el aviso de error con formato bootstrap
         $this ->aviso_fin="</div>";//cerramos el aviso
@@ -30,8 +31,8 @@ class ValidaRegistro{
 
         $this ->error_nombre = $this -> valida_nom($nombre);
         $this ->error_apellidos = $this -> valida_ape($apellidos);
-        $this ->error_usuario = $this -> valida_usu($usuario);
-        $this ->error_email = $this -> valida_email($email);
+        $this ->error_usuario = $this -> valida_usu($conexion, $usuario);
+        $this ->error_email = $this -> valida_email($conexion, $email);
         $this ->error_clave1 = $this -> valida_clave1($clave1);
         $this ->error_clave2 = $this -> valida_clave2($clave1,$clave2);
         if($this ->error_clave1 === "" && $this ->error_clave2 === ""){
@@ -78,7 +79,7 @@ class ValidaRegistro{
         return "";
     }
 
-    private function valida_usu($usuario){
+    private function valida_usu($conexion, $usuario){
         if(!$this -> var_iniciada($usuario)){
             return "Debes escribir el nombre de usuario";
         }else{
@@ -93,15 +94,23 @@ class ValidaRegistro{
             return "El Nombre de Usuario es  muy largo";
         }
 
+        if(RepositorioUsuario :: usu_existe($conexion, $usuario)){
+            return "El Usuario ya existe. Por favor pruebe con otro";
+        }
+
         return "";
     }
 
-    private function valida_email($email){
+    private function valida_email($conexion, $email){
         if(!$this-> var_iniciada($email)){
             return "Debes Proporcionar una cuenta de correo valida";
         } else {
             $this ->email = $email;
         }
+        if(RepositorioUsuario :: ema_existe($conexion, $email)){
+            return "El Email ya existe. Por favor pruebe con otro email ó <a href='#'>Intente recuperar su Contraseña</a>";
+        }
+
         return "";
     }
 

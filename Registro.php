@@ -11,7 +11,8 @@ if (isset($_POST['enviar'])) {
         $_POST['usuario'],
         $_POST['email'],
         $_POST['clave1'],
-        $_POST['clave2']
+        $_POST['clave2'],
+        Conexion ::obtener_con()
     );
 
     if ($validador->registro_valido()) {

@@ -60,16 +60,57 @@ class RepositorioUsuario
             try{
                 $sql = "INSERT INTO usuarios (nombre, apellidos, usuario, email, password, fecha_reg, activo) VALUES (:nombre, :apellidos, :usuario, :email, :password, NOW(), 0)";
                 $sentencia = $conexion->prepare($sql);
-                $sentencia -> bindParam(':nombre', $usuario->get_nombre(), PDO::PARAM_STR);
-                $sentencia -> bindParam(':apellidos', $usuario ->get_apellidos(), PDO::PARAM_STR);
-                $sentencia -> bindParam(':usuario', $usuario ->get_usuario(), PDO::PARAM_STR);
-                $sentencia -> bindParam(':email', $usuario ->get_email(), PDO::PARAM_STR);
-                $sentencia -> bindParam(':password', $usuario ->get_password(), PDO::PARAM_STR);
+                $sentencia -> bindValue(':nombre', $usuario->get_nombre(), PDO::PARAM_STR);
+                $sentencia -> bindValue(':apellidos', $usuario ->get_apellidos(), PDO::PARAM_STR);
+                $sentencia -> bindValue(':usuario', $usuario ->get_usuario(), PDO::PARAM_STR);
+                $sentencia -> bindValue(':email', $usuario ->get_email(), PDO::PARAM_STR);
+                $sentencia -> bindValue(':password', $usuario ->get_password(), PDO::PARAM_STR);
                 $usuario_inserta = $sentencia -> execute();
             }catch(PDOException $ex){
                 print "ERROR" . $ex ->getMessage();
             }
         }
         return $usuario_inserta;
+    }
+    public static function usu_existe($conexion, $usuario){//creamos la funcion para validar si el nombre existe
+        $usu_existe = true;//variable donde sabresmo si existe o no el nombre
+        if(isset($conexion)){//verificamos la conexion si existe
+            try{//si existe 
+                $sql= "SELECT * FROM usuarios WHERE usuario = :usuario";//creamos el query para asber si el nombre existe
+                $sentencia = $conexion->prepare($sql);//preparamos el query creado para ejecutarlo
+                $sentencia -> bindvalue(":usuario", $usuario, PDO::PARAM_STR);//pasamos el valor de la variable $nombre al alias nombre para que sea tomado en el WHERE del query
+                $sentencia -> execute();//ejecutamos la sentencia creada
+                $resultado = $sentencia-> fetchAll();//tomamos el resultado 
+                if(count($resultado)){//si el resultado es positivo pasamos el valor true y si no existe le pasaremos false 
+                    $usu_existe=true;
+                }else{
+                    $usu_existe=false;
+                }
+            }catch(PDOException $ex){
+                print "ERROR" . $ex->getMessage();
+            }
+        }
+        return $usu_existe;//regresamos el valor true/false
+    }
+
+    public static function ema_existe($conexion, $email){//creamos la funcion para validar si el nombre existe
+        $ema_existe = true;//variable donde sabresmo si existe o no el nombre
+        if(isset($conexion)){//verificamos la conexion si existe
+            try{//si existe 
+                $sql= "SELECT * FROM usuarios WHERE email = :email";//creamos el query para asber si el nombre existe
+                $sentencia = $conexion->prepare($sql);//preparamos el query creado para ejecutarlo
+                $sentencia -> bindvalue(":email", $email, PDO::PARAM_STR);//pasamos el valor de la variable $nombre al alias nombre para que sea tomado en el WHERE del query
+                $sentencia -> execute();//ejecutamos la sentencia creada
+                $resultado = $sentencia-> fetchAll();//tomamos el resultado 
+                if(count($resultado)){//si el resultado es positivo pasamos el valor true y si no existe le pasaremos false 
+                    $ema_existe=true;
+                }else{
+                    $ema_existe=false;
+                }
+            }catch(PDOException $ex){
+                print "ERROR" . $ex->getMessage();
+            }
+        }
+        return $ema_existe;//regresamos el valor true/false
     }
 }
