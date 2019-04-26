@@ -118,6 +118,7 @@ class RepositorioUsuario
         $usuario = null;
         if(isset($conexion)){
             try{
+                include_once 'usuario.inc.php';
                 $sql = "SELECT * FROM usuarios WHERE email = :email";
                 $sentencia = $conexion -> prepare($sql);
                 $sentencia -> bindValue(':email', $email, PDO::PARAM_STR);
