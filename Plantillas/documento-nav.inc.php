@@ -13,13 +13,13 @@ Conexion::cerrar_con();
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Arion</a>
+                <a class="navbar-brand" href="<?php echo SERVIDOR ?>">Arion</a>
             </div>
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span> Productos</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Contacto</a></li>
+                    <li><a href="<?php echo SERVIDOR ?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a></li>
+                    <li><a href="<?php echo RUTA_PRODUCTOS ?>"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span> Productos</a></li>
+                    <li><a href="<?php echo RUTA_CONTACTO ?>"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Contacto</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -28,8 +28,8 @@ Conexion::cerrar_con();
                             <?php echo $totalusu?>
                         </a>
                     </li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Iniciar Sesión</a></li>
-                    <li><a href="/Arionx/Registro.php"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Registro</a></li>
+                    <li><a href="<?php echo RUTA_LOGIN ?>"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Iniciar Sesión</a></li>
+                    <li><a href="<?php echo RUTA_REGISTRO ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Registro</a></li>
                 </ul>
             </div>
         </div>

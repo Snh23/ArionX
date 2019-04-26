@@ -3,6 +3,7 @@ include_once 'app/conexion.inc.php';
 include_once 'app/usuario.inc.php';
 include_once 'app/repusuario.inc.php';
 include_once 'app/validaregistro.inc.php';
+include_once 'app/redireccion.inc.php';
 if (isset($_POST['enviar'])) {
     Conexion :: abrir_con();
     $validador = new ValidaRegistro(
@@ -16,12 +17,20 @@ if (isset($_POST['enviar'])) {
     );
 
     if ($validador->registro_valido()) {
-        $usuario = new Usuario('', $validador->obtener_nom(), $validador->obtener_ape(), 
-        $validador->obtener_usu(), $validador->obtener_email(), $validador->obtener_clave(), '', '' );
-        $usuario_inserta = RepositorioUsuario :: insertar_usuarios(Conexion :: obtener_con(), $usuario);
-        if($usuario_inserta){
-            //redirigir a Login si todo fue Currecta
+        $usuario = new Usuario('', 
+        $validador->obtener_nom(), 
+        $validador->obtener_ape(), 
+        $validador->obtener_usu(), 
+        $validador->obtener_email(), 
+        password_hash($validador->obtener_clave(), PASSWORD_DEFAULT),//usamos el metodo Password_hash para encriptar la contraseña proporcionada por el susuario
+                                                                    //este metodo usa dos valores, 1 es el texto/valor a encriptar y el segundo es el tipo de algoritmo a usar
+        '', 
+        '' );
 
+        $usuario_inserta = RepositorioUsuario :: insertar_usuarios(Conexion :: obtener_con(), $usuario);
+
+        if($usuario_inserta){
+            Redireccion ::redirigir(RUTA_REGISTRO_CORRECTO.'?nombre=' . $usuario->get_nombre());
         }
     }
     Conexion :: cerrar_con();

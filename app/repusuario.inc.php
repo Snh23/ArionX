@@ -113,4 +113,30 @@ class RepositorioUsuario
         }
         return $ema_existe;//regresamos el valor true/false
     }
+
+    public static function obtener_usu_por_ema($conexion, $email){
+        $usuario = null;
+        if(isset($conexion)){
+            try{
+                $sql = "SELECT * FROM usuarios WHERE email = :email";
+                $sentencia = $conexion -> prepare($sql);
+                $sentencia -> bindValue(':email', $email, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+                if(!empty($resultado)){
+                    $usuario = new Usuario($resultado['id'], 
+                    $resultado['nombre'],
+                    $resultado['apellidos'],
+                    $resultado['usuario'],
+                    $resultado['email'],
+                    $resultado['password'],
+                    $resultado['fecha_reg'],
+                    $resultado['activo'],);
+                }
+            }catch(PDOException $ex){
+                print 'ERROR' . $ex->getMessage();
+            }
+        }
+        return $usuario;
+    }
 }
