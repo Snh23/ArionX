@@ -22,7 +22,7 @@ class RepositorioUsuario
                             $fila['email'],
                             $fila['password'],
                             $fila['fecha_reg'],
-                            $fila['activo'],
+                            $fila['activo']
                         );
                     }
                 } else {
@@ -132,7 +132,7 @@ class RepositorioUsuario
                     $resultado['email'],
                     $resultado['password'],
                     $resultado['fecha_reg'],
-                    $resultado['activo'],);
+                    $resultado['activo']);
                 }
             }catch(PDOException $ex){
                 print 'ERROR' . $ex->getMessage();

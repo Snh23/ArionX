@@ -17,4 +17,5 @@ define("RUTA_REGISTRO_CORRECTO", SERVIDOR."/registro_correcto.php");
 define("RUTA_LOGIN", SERVIDOR."/login.php");
 define("RUTA_PRODUCTOS", SERVIDOR."/productos.php");
 define("RUTA_CONTACTO", SERVIDOR."/contacto.php");
+define("RUTA_LOGOUT", SERVIDOR."/logout.php");
 ?>

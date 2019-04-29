@@ -1,7 +1,15 @@
 <?php
 include_once 'app/config.inc.php';
 include_once 'app/conexion.inc.php';
+include_once 'app/validalogin.inc.php';
 include_once 'app/repusuario.inc.php';
+include_once 'app/controlsesion.inc.php';
+include_once 'app/redireccion.inc.php';
+
+if(ControlSesion::sesion_iniciada()){
+    Redireccion::redirigir(SERVIDOR);
+}
+
 if(isset($_POST['login'])){
     Conexion :: abrir_con();
     $validador = new ValidadorLogin($_POST['email'],
@@ -10,11 +18,11 @@ if(isset($_POST['login'])){
 
     if($validador -> obtener_error()===''&&
     !is_null($validador -> obtener_usuario())){
-        //iniciar sesion
-        //redirigir a index
-        echo 'Inicio de sesion OK';
-    }else{
-        echo 'Inicio de sesion Fallo';
+        ControlSesion::inicio_sesion(
+            $validador -> obtener_usuario() ->get_id(),
+            $validador -> obtener_usuario() ->get_usuario()
+        );
+        Redireccion::redirigir(SERVIDOR);
     }
     Conexion::cerrar_con();
 }
