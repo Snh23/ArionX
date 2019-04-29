@@ -45,6 +45,4 @@ class Comentario{
         $this -> texto = $texto;
     }
 }
-
-
 ?>
