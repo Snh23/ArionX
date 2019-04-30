@@ -10,10 +10,11 @@ class RepositorioEntrada {
 
         if(isset($conexion)){
             try{
-                $sql = "INSERT INTO entradas (autor_id, titulo, texto, fecha, activa) VALUES (:autor_id, :titulo, :texto, NOW(), 0)";
+                $sql = "INSERT INTO entradas (autor_id, titulo, url, texto, fecha, activa) VALUES (:autor_id, :titulo, :url, :texto, NOW(), 0)";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia -> bindValue(':autor_id', $entrada->get_autorid(), PDO::PARAM_STR);
                 $sentencia -> bindValue(':titulo', $entrada ->get_titulo(), PDO::PARAM_STR);
+                $sentencia -> bindValue(':url', $entrada ->get_url(), PDO::PARAM_STR);
                 $sentencia -> bindValue(':texto', $entrada ->get_texto(), PDO::PARAM_STR);
                 $entrada_insertada = $sentencia -> execute();
             }catch(PDOException $ex){
@@ -36,6 +37,7 @@ class RepositorioEntrada {
                         $entradas[] = new Entrada($fila['id'],
                         $fila['autor_id'],
                         $fila['titulo'],
+                        $fila['url'],
                         $fila['texto'],
                         $fila['fecha'],
                         $fila['activa']);

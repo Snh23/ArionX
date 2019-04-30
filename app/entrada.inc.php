@@ -5,17 +5,19 @@ class Entrada
     private $id;
     private $autor_id;
     private $titulo;
+    private $url;
     private $texto;
     private $fecha;
     private $activa;
 
     //constructor
-    public function __construct($id, $autor_id, $titulo, $texto, $fecha, $activa)
+    public function __construct($id, $autor_id, $titulo, $url, $texto, $fecha, $activa)
     {
         //se inician dentro del cpnstructor
         $this->id = $id;
         $this->autor_id = $autor_id;
         $this->titulo = $titulo;
+        $this->url = $url;
         $this->texto = $texto;
         $this->fecha = $fecha;
         $this->activa = $activa;
@@ -35,6 +37,10 @@ class Entrada
     {
         return $this->titulo;
     }
+    public function get_url()
+    {
+        return $this->url;
+    }
     public function get_texto()
     {
         return $this->texto;
@@ -51,6 +57,10 @@ class Entrada
     public function set_titulo($titulo)
     {
         $this->titulo = $titulo;
+    }
+    public function set_url($url)
+    {
+        $this->url = $url;
     }
     public function set_texto($texto)
     {

@@ -30,7 +30,7 @@ if (isset($_POST['enviar'])) {
         $usuario_inserta = RepositorioUsuario :: insertar_usuarios(Conexion :: obtener_con(), $usuario);
 
         if($usuario_inserta){
-            Redireccion ::redirigir(RUTA_REGISTRO_CORRECTO.'?nombre=' . $usuario->get_nombre());
+            Redireccion ::redirigir(RUTA_REGISTRO_CORRECTO.'/' . $usuario->get_usuario());
         }
     }
     Conexion :: cerrar_con();
@@ -73,7 +73,7 @@ include_once 'Plantillas/documento-nav.inc.php';
                     <h3 class="panel-title">Introduce Tus Datos</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                    <form role="form" method="POST" action="<?php echo RUTA_REGISTRO ?>">
                         <!--mandaremos los datos a la misma pagina-->
                         <?php
                         if (isset($_POST['enviar'])) {

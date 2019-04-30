@@ -24,6 +24,7 @@ RepositorioUsuario::insertar_usuarios(Conexion::obtener_con(), $usuario);
 
 for ($entradas = 0; $entradas < 100; $entradas++){
 $titulo = sa(10);
+$url = $titulo;
 $texto = lorem();
 $autor = random_int(1, 100);
 

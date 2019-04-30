@@ -4,11 +4,11 @@ include_once 'app/conexion.inc.php';
 include_once 'app/repusuario.inc.php';
 include_once 'app/redireccion.inc.php';
 
-if(isset($_GET['nombre']) && !empty($_GET['nombre'])){
+/*if(isset($_GET['nombre']) && !empty($_GET['nombre'])){
 $nombre = $_GET['nombre'];
 }else{
     Redireccion ::redirigir(SERVIDOR);
-}
+}*/
 
 $titulo = '¡Registro Exitoso!';
 
