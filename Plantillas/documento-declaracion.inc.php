@@ -1,3 +1,6 @@
+<?php
+include_once 'app/config.inc.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,8 +14,8 @@
     }
     echo "<title>$titulo</title>";
     ?>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/Styles.css" rel="stylesheet">
+    <link href="<?php echo RUTA_CSS ?>/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo RUTA_CSS ?>/Styles.css" rel="stylesheet">
 </head>
 
 <body>

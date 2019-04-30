@@ -12,10 +12,14 @@ define('PASS_SERV', '');
 
 //rutas de la web
 define("SERVIDOR", "http://localhost:8080/ArionX");
-define("RUTA_REGISTRO", SERVIDOR."/registro.php");
+define("RUTA_REGISTRO", SERVIDOR."/Registro.php");
 define("RUTA_REGISTRO_CORRECTO", SERVIDOR."/registro_correcto.php");
 define("RUTA_LOGIN", SERVIDOR."/login.php");
 define("RUTA_PRODUCTOS", SERVIDOR."/productos.php");
 define("RUTA_CONTACTO", SERVIDOR."/contacto.php");
 define("RUTA_LOGOUT", SERVIDOR."/logout.php");
+
+//recursos
+define("RUTA_CSS", SERVIDOR."/css");
+define("RUTA_JS", SERVIDOR."/js")
 ?>

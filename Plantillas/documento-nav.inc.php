@@ -5,7 +5,6 @@ include_once 'app/config.inc.php';
 Conexion::abrir_con();
 $totalusu = RepositorioUsuario::obtener_usuarios(Conexion::obtener_con());
 /*echo count($totalusu); esto fue una prueba de conexion y consulta a la base de datos*/
-Conexion::cerrar_con();
 ?>
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
