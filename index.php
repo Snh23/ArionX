@@ -50,6 +50,7 @@ if($partes_ruta[0]=='ArionX'){
 
             if($entrada != null){
                 $autor = RepositorioUsuario::obtener_usu_por_id(Conexion::obtener_con(), $entrada ->get_autorid());
+                $comentarios = RepositorioComentario::obtener_comentario(Conexion::obtener_con(), $entrada ->get_id());
                 $entradas_azar = RepositorioEntrada::obtener_entradas_azar(Conexion::obtener_con(), 3);
                 $ruta_elegida = 'vistas/entrada.php';
             }

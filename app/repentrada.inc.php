@@ -81,16 +81,17 @@ class RepositorioEntrada
         return $entrada;
     }
 
-    public static function obtener_entradas_azar($conexion, $limite){
-        $entradas =[];
-        if(isset($conexion)){
-            try{
+    public static function obtener_entradas_azar($conexion, $limite)
+    {
+        $entradas = [];
+        if (isset($conexion)) {
+            try {
                 $sql = "SELECT * FROM entradas ORDER BY RAND() LIMIT $limite";
-                $sentencia = $conexion -> prepare($sql);
-                $sentencia -> execute();
-                $resultado = $sentencia -> fetchAll();
-
-                if(count($resultado)){
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+                $entradas = $resultado;
+                /*if(count($resultado)){
                     foreach($resultado as $fila){
                         $entradas = new Entrada(
                         $fila['id'],
@@ -101,8 +102,8 @@ class RepositorioEntrada
                         $fila['fecha'],
                         $fila['activa']);
                     }
-                }
-            }catch (PDOException $ex){
+                }*/
+            } catch (PDOException $ex) {
                 print "ERROR" . $ex->getMessage();
             }
         }
