@@ -1,4 +1,15 @@
-<?php 
+<?php
+include_once 'app/config.inc.php';
+include_once 'app/conexion.inc.php';
+
+include_once 'app/usuario.inc.php';
+include_once 'app/entrada.inc.php';
+include_once 'app/comentario.inc.php';
+
+include_once 'app/repusuario.inc.php';
+include_once 'app/repentrada.inc.php';
+include_once 'app/repcomentario.inc.php';
+
 $componentes_url = parse_url($_SERVER["REQUEST_URI"]);
 
 $ruta = $componentes_url['path'];
@@ -23,11 +34,25 @@ if($partes_ruta[0]=='ArionX'){
             case 'Registro':
                 $ruta_elegida = 'vistas/Registro.php';
                 break;
+            case 'Relleno_dev':
+                $ruta_elegida = 'vistas/script_relleno.php';
+                break;
         }
     }elseif(count($partes_ruta) == 3){
         if($partes_ruta[1]== 'registro_correcto'){
             $nombre = $partes_ruta[2];
             $ruta_elegida = 'vistas/registro_correcto.php';
+        }
+        if($partes_ruta[1] == 'entrada'){
+            $url = $partes_ruta[2];
+            Conexion::abrir_con();
+            $entrada = RepositorioEntrada::obtener_entrada_url(Conexion::obtener_con(), $url);
+
+            if($entrada != null){
+                $autor = RepositorioUsuario::obtener_usu_por_id(Conexion::obtener_con(), $entrada ->get_autorid());
+                $entradas_azar = RepositorioEntrada::obtener_entradas_azar(Conexion::obtener_con(), 3);
+                $ruta_elegida = 'vistas/entrada.php';
+            }
         }
     }
 }

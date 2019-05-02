@@ -15,7 +15,7 @@ define("SERVIDOR", "http://localhost:8080/ArionX");
 define("RUTA_REGISTRO", SERVIDOR."/Registro");
 define("RUTA_REGISTRO_CORRECTO", SERVIDOR."/registro_correcto");
 define("RUTA_LOGIN", SERVIDOR."/login");
-define("RUTA_PRODUCTOS", SERVIDOR."/productos");
+define("RUTA_ENTRADA", SERVIDOR."/entrada");
 define("RUTA_CONTACTO", SERVIDOR."/contacto");
 define("RUTA_LOGOUT", SERVIDOR."/logout");
 

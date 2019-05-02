@@ -28,7 +28,7 @@ $url = $titulo;
 $texto = lorem();
 $autor = random_int(1, 100);
 
-$entrada = new Entrada('', $autor, $titulo, $texto, '', '');
+$entrada = new Entrada('', $autor, $url, $titulo, $texto, '', '');
 RepositorioEntrada::insertar_entrada(Conexion::obtener_con(), $entrada);
 }
 

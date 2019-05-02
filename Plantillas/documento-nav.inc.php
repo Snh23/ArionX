@@ -20,7 +20,7 @@ $totalusu = RepositorioUsuario::obtener_usuarios(Conexion::obtener_con());
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li><a href="<?php echo SERVIDOR ?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a></li>
-                <li><a href="<?php echo RUTA_PRODUCTOS ?>"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span> Productos</a></li>
+                <li><a href="<?php echo RUTA_ENTRADA ?>"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span> Entradas</a></li>
                 <li><a href="<?php echo RUTA_CONTACTO ?>"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Contacto</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

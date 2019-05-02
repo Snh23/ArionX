@@ -44,7 +44,7 @@ class EscritorEntradas
                     </div>
                     <br>
                     <div class="text-right">
-                        <a class="btn btn-primary" href="#" role="button">Seguir Leyendo</a>
+                        <a class="btn btn-primary" href="<?php echo RUTA_ENTRADA . "/" . $entrada -> get_url() ?>" role="button">Seguir Leyendo</a>
                     </div>
                 </div>
             </div>
