@@ -57,3 +57,42 @@ color: white !important;
     background-color: white;
     padding: 2em;
 }
+
+.sidebar{
+    background-color: white;
+}
+
+.sidebar, .gg_elemento{
+padding-top: 1em;
+padding-bottom: 1em;
+}
+
+.gg_elemento:hover{
+background-color: #2b2b2b !important;
+color: rgb(93, 178, 231);
+}
+
+.gg_elemento{
+    color: white;
+}
+
+#gg_entradas{
+    background-color: rgb(93, 178, 231);
+}
+
+#gg_comentarios{
+    background-color: #029ac4;
+}
+
+#gg_favoritos{
+    background-color: #394a66;
+}
+
+.parte_gestor_entradas{
+    background-color: rgb(93, 178, 231);
+}
+
+.table-striped>body>tr:nth-child(odd)>td,
+.table-striped>body>tr:nth-child(odd)>th{
+    background-color: #394a66;
+}

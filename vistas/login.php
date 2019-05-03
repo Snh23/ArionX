@@ -42,7 +42,7 @@ include_once 'Plantillas/documento-nav.inc.php';
                     <h4>Iniciar Sesión</h4>
                 </div>
                 <div class="panel panel-body">
-                    <form role="form" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                    <form role="form" method="POST" action="<?php echo RUTA_LOGIN; ?>">
                         <h2>Introduce Tus Datos</h2>
                         <br>
                         <label for="email" class="sr-only">Email</label>

@@ -25,10 +25,10 @@ class RepositorioComentario {
 
     }
     public static function obtener_comentario($conexion, $entrada_id){
-        $comentario = array();
+        $comentarios = array();
         if(isset($conexion)){
             try{
-                $sql = "SELECT * FROM comentarios WHERE id = :entrda_id";
+                $sql = "SELECT * FROM comentarios WHERE entrada_id = :entrada_id";
                 $sentencia = $conexion -> prepare($sql);
                 $sentencia -> bindValue(':entrada_id', $entrada_id, PDO::PARAM_STR);
                 $sentencia -> execute();
@@ -42,8 +42,6 @@ class RepositorioComentario {
                         $fila['texto'],
                         $fila['fecha']);
                     }
-                }else{
-                    print 'Todavia no hay comentarios';
                 }
             }catch (PDOException $ex){
                 print "ERROR" . $ex->getMessage();
@@ -51,5 +49,25 @@ class RepositorioComentario {
         }
         return $comentarios;
     }
+
+    public static function contar_comentarios_activos_usu($conexion, $usuario_id){
+        $total_comentarios = '0';
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT COUNT(*) AS total_comentarios FROM comentarios Where autor_id = :autor_id";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindValue(':autor_id', $usuario_id, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+                if (!empty($resultado)) {
+                    $total_comentarios = $resultado['total_comentarios'];
+                }
+            } catch (PDOException $ex) {
+                print "ERROR" . $ex->getMessage();
+            }
+        }
+        return $total_comentarios;
+    }
+
 }
 ?>

@@ -34,6 +34,10 @@ if($partes_ruta[0]=='ArionX'){
             case 'Registro':
                 $ruta_elegida = 'vistas/Registro.php';
                 break;
+            case 'gestor':
+                $ruta_elegida = 'vistas/gestor.php';
+                $gestor_actual = '';
+                break;
             case 'Relleno_dev':
                 $ruta_elegida = 'vistas/script_relleno.php';
                 break;
@@ -53,6 +57,22 @@ if($partes_ruta[0]=='ArionX'){
                 $comentarios = RepositorioComentario::obtener_comentario(Conexion::obtener_con(), $entrada ->get_id());
                 $entradas_azar = RepositorioEntrada::obtener_entradas_azar(Conexion::obtener_con(), 3);
                 $ruta_elegida = 'vistas/entrada.php';
+            }
+        }
+        if($partes_ruta[1] == 'gestor'){
+            switch($partes_ruta[2]){
+                case 'entradas':
+                    $gestor_actual = 'entradas';
+                    $ruta_elegida = 'vistas/gestor.php';
+                    break;
+                case 'comentarios':
+                    $gestor_actual = 'comentarios';
+                    $ruta_elegida = 'vistas/gestor.php';
+                    break;
+                case 'favoritos':
+                    $gestor_actual = 'favoritos';
+                    $ruta_elegida = 'vistas/gestor.php';
+                    break;
             }
         }
     }

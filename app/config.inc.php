@@ -16,8 +16,12 @@ define("RUTA_REGISTRO", SERVIDOR."/Registro");
 define("RUTA_REGISTRO_CORRECTO", SERVIDOR."/registro_correcto");
 define("RUTA_LOGIN", SERVIDOR."/login");
 define("RUTA_ENTRADA", SERVIDOR."/entrada");
-define("RUTA_CONTACTO", SERVIDOR."/contacto");
+define("RUTA_FAVORITOS", SERVIDOR."/favoritos");
 define("RUTA_LOGOUT", SERVIDOR."/logout");
+define("RUTA_GESTOR", SERVIDOR."/gestor");
+define("RUTA_GESTOR_ENTRADAS", RUTA_GESTOR."/entradas");
+define("RUTA_GESTOR_COMENTARIOS", RUTA_GESTOR."/comentarios");
+define("RUTA_GESTOR_FAVORITOS", RUTA_GESTOR."/favoritos");
 
 //recursos
 define("RUTA_CSS", SERVIDOR."/css");

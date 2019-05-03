@@ -109,4 +109,42 @@ class RepositorioEntrada
         }
         return $entradas;
     }
+
+    public static function contar_entradas_activas_usu($conexion, $usuario_id){
+        $total_entradas = '0';
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT COUNT(*) AS total_entradas FROM entradas Where autor_id = :autor_id AND activa= 1";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindValue(':autor_id', $usuario_id, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+                if (!empty($resultado)) {
+                    $total_entradas = $resultado['total_entradas'];
+                }
+            } catch (PDOException $ex) {
+                print "ERROR" . $ex->getMessage();
+            }
+        }
+        return $total_entradas;
+    }
+    public static function contar_entradas_inactivas_usu($conexion, $usuario_id){
+        $total_entradas = '0';
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT COUNT(*) AS total_entradas FROM entradas Where autor_id = :autor_id AND activa= 0";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindValue(':autor_id', $usuario_id, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+                if (!empty($resultado)) {
+                    $total_entradas = $resultado['total_entradas'];
+                }
+            } catch (PDOException $ex) {
+                print "ERROR" . $ex->getMessage();
+            }
+        }
+        return $total_entradas;
+    }
 }
+?>
