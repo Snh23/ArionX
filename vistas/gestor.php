@@ -11,6 +11,7 @@ switch($gestor_actual){
         include_once 'plantillas/gestor_generico.inc.php';
         break;
     case 'entradas';
+        $array_entradas = RepositorioEntrada::obtener_entradas_usuario_fechadesc(Conexion::obtener_con(), $_SESSION['id_usuario']);
         include_once 'plantillas/gestor_entradas.inc.php';
         break;
     case 'comentarios';

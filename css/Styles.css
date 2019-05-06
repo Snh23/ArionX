@@ -90,9 +90,38 @@ color: rgb(93, 178, 231);
 
 .parte_gestor_entradas{
     background-color: rgb(93, 178, 231);
+    color: white;
 }
 
-.table-striped>body>tr:nth-child(odd)>td,
-.table-striped>body>tr:nth-child(odd)>th{
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th{
     background-color: #394a66;
+}
+
+.table-striped>tbody>tr>td{
+    border: none;
+}
+
+.table>thead>tr>th{
+    border: none;
+}
+
+tbody:before{
+    content: "-";
+    display: block;
+    line-height: 1em;
+    color: transparent !important;
+}
+
+#boton_entrada_nva{
+    background-color: #394a66 !important;
+}
+
+#boton_entrada_nva:hover{
+background-color: black !important;
+}
+
+.form_nva_entrada{
+    background-color: white;
+    padding: 2em;
 }

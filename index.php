@@ -41,6 +41,9 @@ if($partes_ruta[0]=='ArionX'){
             case 'Relleno_dev':
                 $ruta_elegida = 'vistas/script_relleno.php';
                 break;
+            case 'nueva_entrada':
+                $ruta_elegida = 'vistas/nueva_entrada.php';
+                break;
         }
     }elseif(count($partes_ruta) == 3){
         if($partes_ruta[1]== 'registro_correcto'){

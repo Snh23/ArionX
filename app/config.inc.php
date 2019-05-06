@@ -22,7 +22,7 @@ define("RUTA_GESTOR", SERVIDOR."/gestor");
 define("RUTA_GESTOR_ENTRADAS", RUTA_GESTOR."/entradas");
 define("RUTA_GESTOR_COMENTARIOS", RUTA_GESTOR."/comentarios");
 define("RUTA_GESTOR_FAVORITOS", RUTA_GESTOR."/favoritos");
-
+define("RUTA_ENTRADA_NVA", SERVIDOR."/nueva_entrada");
 //recursos
 define("RUTA_CSS", SERVIDOR."/css");
 define("RUTA_JS", SERVIDOR."/js")
