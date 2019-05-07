@@ -12,12 +12,13 @@ class RepositorioEntrada
 
         if (isset($conexion)) {
             try {
-                $sql = "INSERT INTO entradas (autor_id, titulo, url, texto, fecha, activa) VALUES (:autor_id, :titulo, :url, :texto, NOW(), 0)";
+                $sql = "INSERT INTO entradas (autor_id, titulo, url, texto, fecha, activa) VALUES (:autor_id, :titulo, :url, :texto, NOW(), :publica)";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindValue(':autor_id', $entrada->get_autorid(), PDO::PARAM_STR);
                 $sentencia->bindValue(':titulo', $entrada->get_titulo(), PDO::PARAM_STR);
                 $sentencia->bindValue(':url', $entrada->get_url(), PDO::PARAM_STR);
                 $sentencia->bindValue(':texto', $entrada->get_texto(), PDO::PARAM_STR);
+                $sentencia->bindValue(':publica', $entrada->are_activa(), PDO::PARAM_STR);
                 $entrada_insertada = $sentencia->execute();
             } catch (PDOException $ex) {
                 print "ERROR" . $ex->getMessage();
@@ -191,7 +192,7 @@ class RepositorioEntrada
             try{
                 $sql = "SELECT * FROM entradas WHERE titulo = :titulo";
                 $sentencia = $conexion -> prepare($sql);
-                $sentencia = bindValue(':titulo', PDO::PARAM_STR);
+                $sentencia -> bindValue(':titulo', PDO::PARAM_STR);
                 $sentencia -> execute();
                 $resultado = $sentencia -> fetchAll();
 
@@ -213,7 +214,7 @@ class RepositorioEntrada
             try{
                 $sql = "SELECT * FROM entradas WHERE url = :url";
                 $sentencia = $conexion -> prepare($sql);
-                $sentencia = bindValue(':url', PDO::PARAM_STR);
+                $sentencia -> bindValue(':url', PDO::PARAM_STR);
                 $sentencia -> execute();
                 $resultado = $sentencia -> fetchAll();
 

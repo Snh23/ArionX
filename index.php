@@ -39,10 +39,13 @@ if($partes_ruta[0]=='ArionX'){
                 $gestor_actual = '';
                 break;
             case 'Relleno_dev':
-                $ruta_elegida = 'vistas/script_relleno.php';
+                $ruta_elegida = 'scripts/script_relleno.php';
                 break;
             case 'nueva_entrada':
                 $ruta_elegida = 'vistas/nueva_entrada.php';
+                break;
+            case 'borrar_entrada':
+                $ruta_elegida = 'scripts/borrar_entrada.php';
                 break;
         }
     }elseif(count($partes_ruta) == 3){

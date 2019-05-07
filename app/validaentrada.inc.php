@@ -24,7 +24,7 @@ class ValidaEntrada {
 
         $this ->error_titulo = $this -> valida_titulo($conexion, $titulo);
         $this ->error_url = $this -> valida_url($conexion, $url);
-        $this ->error_texto = $this -> valida_texto($conexion, $texto);
+        $this ->error_texto = $this -> valida_texto($texto);
     }
 
     private function variable_iniciada($variable){
@@ -58,7 +58,10 @@ class ValidaEntrada {
             $this -> url =$url;
         }
 
-        if(strlen($url) != strlen(trim($url))){ //con esto verificamos si la url escrita tiene espacios, contamos el largo de ingresado asi contanmos y eliminamos los espacios, comparamos con el primer conteo
+        $url_tratada = str_replace(' ', '', $url);
+        $url_tratada = preg_replace('/\s+/ ', '',$url_tratada);
+
+        if(strlen($url) != strlen($url_tratada)){ //con esto verificamos si la url escrita tiene espacios, contamos el largo de ingresado asi contanmos y eliminamos los espacios, comparamos con el primer conteo
             return "La URL no puede contener espacios vacios";
         }
 
@@ -67,7 +70,7 @@ class ValidaEntrada {
         }
     }
 
-    private function valida_texto($conexion, $texto){
+    private function valida_texto($texto){
         if(!$this -> variable_iniciada($texto)){
             return "El contenido no puede estar vacio";
         }else{
@@ -88,13 +91,13 @@ class ValidaEntrada {
     }
 
     public function mostrar_titulo(){
-        if(!$this -> titulo != ""){
+        if($this -> titulo != ""){
             echo 'value = "' . $this -> titulo . '"';
         }
     }
 
     public function mostrar_url(){
-        if(!$this -> url != ""){
+        if($this -> url != ""){
             echo 'value = "' . $this -> url . '"';
         }
     }
@@ -105,14 +108,20 @@ class ValidaEntrada {
         }
     }
 
+    public function mostrar_error_titulo(){
+        if($this -> error_titulo != ""){
+            echo $this -> aviso_inicio . $this -> error_titulo . $this -> aviso_cierre;
+        }
+    }
+
     public function mostrar_error_url(){
-        if(!$this -> error_url != ""){
+        if($this -> error_url != ""){
             echo $this -> aviso_inicio . $this -> error_url . $this -> aviso_cierre;
         }
     }
 
     public function mostrar_error_texto(){
-        if(!$this -> error_texto != ""){
+        if($this -> error_texto != ""){
             echo $this -> aviso_inicio . $this -> error_texto . $this -> aviso_cierre;
         }
     }

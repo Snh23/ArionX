@@ -7,8 +7,8 @@
     <input id="url" name="url" type="text" class="form-control" placeholder="No usar espacios">
 </div>
 <div class="form-group">
-    <label for="contenido">Contenido</label>
-    <textarea class="form-control" name="contenido" id="contenido" rows="5" placeholder="Escribe aqui tu articulo"></textarea>
+    <label for="texto">Contenido</label>
+    <textarea class="form-control" name="texto" id="texto" rows="5" placeholder="Escribe aqui tu articulo"></textarea>
 </div>
 <div class="checkbox">
     <label>

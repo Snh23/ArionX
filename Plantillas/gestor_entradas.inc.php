@@ -18,7 +18,8 @@
                         <th>T&iacutetulo</th>
                         <th>Estado</th>
                         <th>Comentarios</th>
-                        <th>Acciones</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,13 +29,18 @@
                         $comentarios_entrada_actual = $array_entradas[$i][1];
                         ?>
                         <tr>
-                            <td><?php echo $entrada_actual -> get_fecha(); ?></td>
-                            <td><?php echo $entrada_actual -> get_titulo(); ?></td>
-                            <td><?php echo $entrada_actual -> are_activa(); ?></td>
+                            <td><?php echo $entrada_actual->get_fecha(); ?></td>
+                            <td><?php echo $entrada_actual->get_titulo(); ?></td>
+                            <td><?php echo $entrada_actual->are_activa(); ?></td>
                             <td><?php echo $comentarios_entrada_actual; ?></td>
                             <td>
-                                <button type="button" class="btn btn-default btn-xs">Editar</button>
-                                <button type="button" class="btn btn-default btn-xs">Borrar</button>
+                                <button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span></button>
+                            </td>
+                            <td>
+                                <form method="POST" action="<?php echo RUTA_ENTRADA_DEL; ?>">
+                                <input type="hidden" name="id_borrar" value="<?php echo $entrada_actual->get_id(); ?>">
+                                    <button type="submit" class="btn btn-danger btn-xs" name="borrar_entrada"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+                                </form>
                             </td>
                         </tr>
                     <?php

@@ -32,10 +32,12 @@ if (isset($_POST['enviar'])) {
                 $entrada_publica
             );
 
-            $entrada_insertada = RepositorioEntrada::inserta_entrada(Conexion::obtener_con(), $entrada);
+            $entrada_insertada = RepositorioEntrada::insertar_entrada(Conexion::obtener_con(), $entrada);
             if ($entrada_insertada) {
                 Redireccion::redirigir(RUTA_GESTOR_ENTRADAS);
             }
+        }else{
+            Redireccion::redirigir(RUTA_LOGIN);
         }
         Conexion::cerrar_con();
     }
