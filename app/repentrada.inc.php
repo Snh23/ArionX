@@ -229,6 +229,28 @@ class RepositorioEntrada
         }
         return $url_existe;
     }
+
+    public static function del_comentarios_entradas($conexion, $entrada_id){
+        if(isset($conexion)){
+            try{
+                $conexion -> beginTransaction();
+                $sql1 = "DELETE FROM comentarios WHERE entrada_id = :entrada_id";
+                $sentencia1 = $conexion -> prepare($sql1);
+                $sentencia1 -> bindValue(':entrada_id', $entrada_id, PDO::PARAM_STR);
+                $sentencia1 -> execute();
+
+                $sql2 = "DELETE FROM entradas WHERE id = :entrada_id";
+                $sentencia2 = $conexion -> prepare($sql2);
+                $sentencia2 -> bindValue(':entrada_id', $entrada_id, PDO::PARAM_STR);
+                $sentencia2 -> execute();
+
+                $conexion -> commit();
+            }catch(PDOException $ex){
+                print "ERROR" . $ex->getMessage();
+                $conexion -> rollback();
+            }
+        }
+    }
 //CASE_INSENSITIVE - no distingue entre mayusculas y minusculas - esto es en la base de datos.
 }
 /*SELECT a.id, a.autor_id, a.url, a.titulo, a.texto, a.fecha, a.activa, COUNT(b.id) AS 'Cantidad_Comentarios' 

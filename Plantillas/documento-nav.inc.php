@@ -26,7 +26,7 @@ $totalusu = RepositorioUsuario::obtener_usuarios(Conexion::obtener_con());
                 <li><a href="<?php echo RUTA_ENTRADA ?>"><span class="glyphicon glyphicon-compressed"
                             aria-hidden="true"></span> Entradas</a></li>
                 <li><a href="<?php echo RUTA_GESTOR_COMENTARIOS ?>"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                        Inicio</a></li>
+                        Comentarios</a></li>
                 <li><a href="<?php echo RUTA_FAVORITOS ?>"><span class="glyphicon glyphicon-star"
                             aria-hidden="true"></span> Favoritos</a></li>
             </ul>
