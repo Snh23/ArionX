@@ -37,7 +37,7 @@ class EscritorEntradas
                             ?>
                         </strong>
                     </p>
-                    <div class="text-justify">
+                    <div class="hyphenation text-justify">
                         <?php
                         echo nl2br(self::resumir_texto($entrada->get_texto()));
                         ?>
