@@ -2,7 +2,7 @@
 
 include_once 'app/config.inc.php';
 include_once 'app/conexion.inc.php';
-include_once 'app/entrada.inc.php';
+include_once 'app/repentrada.inc.php';
 include_once 'app/redireccion.inc.php';
 
 if(isset($_POST['borrar_entrada'])){

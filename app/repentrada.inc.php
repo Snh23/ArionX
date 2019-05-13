@@ -82,6 +82,33 @@ class RepositorioEntrada
         return $entrada;
     }
 
+    public static function obtener_entrada_id($conexion, $id)
+    {
+        $entrada = null;
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT * FROM entradas Where id= :id";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindValue(':id', $id, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+                if (!empty($resultado)) {
+                    $entrada = new Entrada(
+                        $resultado['id'],
+                        $resultado['autor_id'],
+                        $resultado['titulo'],
+                        $resultado['url'],
+                        $resultado['texto'],
+                        $resultado['fecha'],
+                        $resultado['activa']
+                    );
+                }
+            } catch (PDOException $ex) {
+                print "ERROR" . $ex->getMessage();
+            }
+        }
+        return $entrada;
+    }
     public static function obtener_entradas_azar($conexion, $limite)
     {
         $entradas = [];
@@ -169,8 +196,8 @@ class RepositorioEntrada
                         new Entrada(
                             $fila['id'],
                             $fila['autor_id'],
-                            $fila['url'],
                             $fila['titulo'],
+                            $fila['url'],
                             $fila['texto'],
                             $fila['fecha'],
                             $fila['activa']

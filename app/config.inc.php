@@ -24,6 +24,7 @@ define("RUTA_GESTOR_COMENTARIOS", RUTA_GESTOR."/comentarios");
 define("RUTA_GESTOR_FAVORITOS", RUTA_GESTOR."/favoritos");
 define("RUTA_ENTRADA_NVA", SERVIDOR."/nueva_entrada");
 define("RUTA_ENTRADA_DEL", SERVIDOR."/borrar_entrada");
+define("RUTA_ENTRADA_EDI", SERVIDOR."/editar_entrada");
 //recursos
 define("RUTA_CSS", SERVIDOR."/css");
 define("RUTA_JS", SERVIDOR."/js")

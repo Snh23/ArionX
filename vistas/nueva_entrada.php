@@ -25,8 +25,8 @@ if (isset($_POST['enviar'])) {
             $entrada = new Entrada(
                 '',
                 $_SESSION['id_usuario'],
-                $validador->get_url(),
                 $validador->get_titulo(),
+                $validador->get_url(),
                 $validador->get_texto(),
                 '',
                 $entrada_publica
