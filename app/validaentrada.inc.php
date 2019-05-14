@@ -2,7 +2,7 @@
 include_once 'repentrada.inc.php';
 include_once 'valida.inc.php';
 
-class ValidaEntrada extends Valida {
+class ValidaEntrada extends Validador {
     public function __construct($titulo, $url, $texto, $conexion)
     {
         $this ->aviso_inicio = "<br><div class='alert alert-danger' role='alert'>";
@@ -16,7 +16,5 @@ class ValidaEntrada extends Valida {
         $this ->error_url = $this -> valida_url($conexion, $url);
         $this ->error_texto = $this -> valida_texto($texto);
     }
-
-    
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-abstract class Valida{
+abstract class Validador{
     protected $aviso_inicio;
     protected $aviso_cierre;
 

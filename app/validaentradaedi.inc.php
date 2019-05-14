@@ -2,18 +2,19 @@
 include_once 'repentrada.inc.php';
 include_once 'valida.inc.php';
 
-class ValidaEntradaEdi extends Valida{
+class ValidaEntradaEdi extends Validador{
     private $cambios_realizados;
-//campos con los cambios realizados en la edicion
+
     private $checkbox;
-//campos con el contenido antes de la edicion
+
     private $titulo_ori;
     private $url_ori;
     private $texto_ori;
     private $checkbox_ori;
 
 
-    public function __construct($titulo, $titulo_ori, $url, $url_ori, $texto, $texto_ori, $checkbox, $checkbox_ori, $conexion)
+    public function __construct($titulo, $titulo_ori, $url, $url_ori, $texto, $texto_ori, 
+        $checkbox, $checkbox_ori, $conexion)
     {
         $this -> titulo = $this -> devolver_var_di_ini($titulo);
         $this -> url = $this -> devolver_var_di_ini($url);
@@ -45,7 +46,7 @@ class ValidaEntradaEdi extends Valida{
                 $this -> error_titulo ="";
             }
             
-            if($this -> url !== $this ->urlo_ori){
+            if($this -> url !== $this ->url_ori){
                 $this -> error_url = $this -> valida_url($conexion, $this -> url);
             }else{
                 $this -> error_url ="";
