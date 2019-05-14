@@ -34,7 +34,7 @@ include_once 'Plantillas/documento-nav.inc.php';
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            
+
         </div>
         <div class="col-md-6">
             <div class="panel panel-default">
@@ -46,26 +46,29 @@ include_once 'Plantillas/documento-nav.inc.php';
                         <h2>Introduce Tus Datos</h2>
                         <br>
                         <label for="email" class="sr-only">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Email" 
-                            <?php if(isset($_POST['login']) && isset($_POST['email']) && !empty($_POST['email'])){
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email" <?php if(isset($_POST['login']) && isset($_POST['email']) && !empty($_POST['email'])){
                                 echo 'value="' . $_POST['email'] . '"';
                             }
-                            ?>
-                            required autofocus>
+                            ?> required autofocus>
                         <br>
                         <label for="clave" class="sr-only">Contraseña</label>
-                        <input type="password" name="clave" id="clave" class="form-control" placeholder="Contraseña" required>
+                        <input type="password" name="clave" id="clave" class="form-control" placeholder="Contraseña"
+                            required>
                         <br>
+                        <?php if(isset($_POST['login'])){
+                            $validador ->mostrar_error();
+                        }
+                        ?>
                         <br>
                         <button type="submit" name="login" class="btn btn-lg btn-primary btn-block">
                             Iniciar Sesión
                         </button>
-                </form>
-                <br>
-                <br>
-                <div class="text-center">
-                    <a href="#">¿Olvidaste tu Contraseña</a>
-                </div>
+                    </form>
+                    <br>
+                    <br>
+                    <div class="text-center">
+                        <a href="<?php echo RUTA_RECUPERAR_CLAVE ?>">¿Olvidaste tu Contraseña</a>
+                    </div>
                 </div>
             </div>
         </div>

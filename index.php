@@ -50,6 +50,15 @@ if($partes_ruta[0]=='ArionX'){
             case 'editar_entrada':
                 $ruta_elegida = 'vistas/editar_entrada.php';
                 break;
+            case 'recuperar_cl':
+                $ruta_elegida = 'vistas/recupera_clave.php';
+                break;
+            case 'generar_url_secreta':
+                $ruta_elegida = 'scripts/generar_url_secreta.php';
+                break;
+            case 'mail':
+                $ruta_elegida = 'vistas/prueba_mail.php';
+                break;
         }
     }elseif(count($partes_ruta) == 3){
         if($partes_ruta[1]== 'registro_correcto'){

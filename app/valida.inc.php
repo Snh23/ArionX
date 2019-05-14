@@ -57,7 +57,7 @@ abstract class Validador{
         }
     }
 
-    protected function valida_texto($texto){
+    protected function valida_texto($conexion, $texto){
         if(!$this -> variable_iniciada($texto)){
             return "El contenido no puede estar vacio";
         }else{

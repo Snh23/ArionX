@@ -46,7 +46,7 @@ class ValidaEntradaEdi extends Validador{
                 $this -> error_titulo ="";
             }
             
-            if($this -> url !== $this ->url_ori){
+            if($this -> url !== $this -> url_ori){
                 $this -> error_url = $this -> valida_url($conexion, $this -> url);
             }else{
                 $this -> error_url ="";

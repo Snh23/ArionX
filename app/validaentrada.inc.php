@@ -14,7 +14,7 @@ class ValidaEntrada extends Validador {
 
         $this ->error_titulo = $this -> valida_titulo($conexion, $titulo);
         $this ->error_url = $this -> valida_url($conexion, $url);
-        $this ->error_texto = $this -> valida_texto($texto);
+        $this ->error_texto = $this -> valida_texto($conexion, $texto);
     }
 }
 ?>

@@ -47,3 +47,14 @@ CREATE TABLE comentarios(
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 );
+CREATE TABLE recupera_clave(
+    id INT NOT NULL UNIQUE AUTO_INCREMENT,
+    usuario_id INT NOT NULL,
+    url_secreta VARCHAR(255) NOT NULL,
+    fecha DATETIME NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (usuario_id)
+        REFERENCES usuarios(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);

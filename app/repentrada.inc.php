@@ -278,6 +278,33 @@ class RepositorioEntrada
             }
         }
     }
+
+    public static function actualizar_entrada($conexion, $id,$titulo, $url, $texto, $activa){
+        $actualizacion_correcta = false;
+        if(isset($conexion)){
+            try{
+                $sql ="UPDATE entradas SET titulo = :titulo, url = :url, texto = :texto, activa = :activa WHERE id = :id";
+                $sentencia = $conexion -> prepare($sql);
+                $sentencia -> bindValue(':titulo', $titulo, PDO::PARAM_STR);
+                $sentencia -> bindValue(':url', $url, PDO::PARAM_STR);
+                $sentencia -> bindValue(':texto', $texto, PDO::PARAM_STR);
+                $sentencia -> bindValue(':activa', $activa, PDO::PARAM_STR);
+                $sentencia -> bindValue(':id', $id, PDO::PARAM_STR);
+
+                $sentencia -> execute();
+
+                $resultado = $sentencia->rowCount();
+
+                if($resultado){
+                    $actualizacion_correcta = true;
+                }
+            }catch(PDOException $ex){
+                print 'ERROR' . $ex -> getMessage();
+            }
+
+        }
+        return $actualizacion_correcta;
+    }
 //CASE_INSENSITIVE - no distingue entre mayusculas y minusculas - esto es en la base de datos.
 }
 /*SELECT a.id, a.autor_id, a.url, a.titulo, a.texto, a.fecha, a.activa, COUNT(b.id) AS 'Cantidad_Comentarios' 

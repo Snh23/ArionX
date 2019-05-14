@@ -25,6 +25,9 @@ define("RUTA_GESTOR_FAVORITOS", RUTA_GESTOR."/favoritos");
 define("RUTA_ENTRADA_NVA", SERVIDOR."/nueva_entrada");
 define("RUTA_ENTRADA_DEL", SERVIDOR."/borrar_entrada");
 define("RUTA_ENTRADA_EDI", SERVIDOR."/editar_entrada");
+define("RUTA_RECUPERAR_CLAVE", SERVIDOR."/recuperar_cl");
+define("RUTA_GENERAR_URL_SECRETA", SERVIDOR."/generar_url_secreta");
+define("RUTA_MAIL", SERVIDOR. "/mail");
 //recursos
 define("RUTA_CSS", SERVIDOR."/css");
 define("RUTA_JS", SERVIDOR."/js")

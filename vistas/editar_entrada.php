@@ -17,6 +17,20 @@ if(isset($_POST['guardar_cambios_entrada'])){
     $_POST['url'], $_POST['url_original'],
     htmlspecialchars($_POST['texto']), $_POST['texto_original'],
     $entrada_publica_nueva, $_POST['publicar_original'], Conexion::obtener_con());
+
+    if(!$validador -> hay_cambios()){
+Redireccion::redirigir(RUTA_GESTOR_ENTRADAS);
+    }else{
+        if($validador -> entrada_valida()){
+            $cambio_efectuado = RepositorioEntrada::actualizar_entrada(Conexion::obtener_con(), $_POST['id_entrada'], 
+                $validador -> get_titulo(), $validador -> get_url(), 
+                $validador -> get_texto(), $validador -> get_checkbox());
+            if($cambio_efectuado){
+                echo 'ENTRADA VALIDA Y GUARDADA';
+                Redireccion::redirigir(RUTA_GESTOR_ENTRADAS);
+            }
+        }
+    }
 }
 
 $titulo = "Editar Entrada";
@@ -40,6 +54,7 @@ include_once 'Plantillas/documento-nav.inc.php';
                     Conexion::cerrar_con();
                 }else if(isset($_POST['guardar_cambios_entrada'])){
                     $id_entrada = $_POST['id_entrada'];
+                    $entrada_recuperada = RepositorioEntrada::obtener_entrada_id(Conexion::obtener_con(), $id_entrada);
                     //plantilla valida
                     include_once 'plantillas/entrada_recuperada_valida.inc.php';
 
