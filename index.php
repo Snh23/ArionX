@@ -93,6 +93,10 @@ if($partes_ruta[0]=='ArionX'){
                     break;
             }
         }
+        if($partes_ruta[1] == 'devuelve_cl'){
+            $url_personal = $partes_ruta[2];
+            $ruta_elegida = 'vistas/devuelve_cl.php';
+        }
     }
 }
 

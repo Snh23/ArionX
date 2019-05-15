@@ -28,6 +28,7 @@ define("RUTA_ENTRADA_EDI", SERVIDOR."/editar_entrada");
 define("RUTA_RECUPERAR_CLAVE", SERVIDOR."/recuperar_cl");
 define("RUTA_GENERAR_URL_SECRETA", SERVIDOR."/generar_url_secreta");
 define("RUTA_MAIL", SERVIDOR. "/mail");
+define("RUTA_DEVUELVE_CLAVE",SERVIDOR. "/devuelve_cl");
 //recursos
 define("RUTA_CSS", SERVIDOR."/css");
 define("RUTA_JS", SERVIDOR."/js")
