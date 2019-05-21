@@ -305,6 +305,41 @@ class RepositorioEntrada
         }
         return $actualizacion_correcta;
     }
+
+    public static function buscar_entradas_todos_campos($conexion, $termino_busqueda){
+        $entradas =[];
+        $termino_busqueda = '%' . $termino_busqueda . '%';
+        if(isset($conexion)){
+            try{
+                //podemos condicionar a que solo muestre las entradas activas
+                $sql = "SELECT * FROM entradas 
+                        WHERE titulo LIKE :busqueda 
+                        OR texto LIKE :busqueda 
+                        ORDER BY fecha DESC LIMIT 25";
+                $sentencia = $conexion -> prepare($sql);
+                $sentencia -> bindValue(':busqueda', $termino_busqueda, PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                $resultado = $sentencia -> fetchAll();
+                if(count($resultado)){
+                    foreach($resultado as $fila){
+                        $entradas[] = new Entrada(
+                            $fila['id'], 
+                            $fila['autor_id'], 
+                            $fila['titulo'], 
+                            $fila['url'], 
+                            $fila['texto'], 
+                            $fila['fecha'], 
+                            $fila['activa']
+                        );
+                    }
+                }
+            }catch(PDOException $ex){
+                print 'ERROR' . $ex -> getMessage();
+            }
+            return $entradas;
+        }
+    }
 //CASE_INSENSITIVE - no distingue entre mayusculas y minusculas - esto es en la base de datos.
 }
 /*SELECT a.id, a.autor_id, a.url, a.titulo, a.texto, a.fecha, a.activa, COUNT(b.id) AS 'Cantidad_Comentarios' 

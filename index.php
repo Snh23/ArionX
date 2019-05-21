@@ -59,6 +59,9 @@ if($partes_ruta[0]=='ArionX'){
             case 'mail':
                 $ruta_elegida = 'vistas/prueba_mail.php';
                 break;
+             case 'buscar':
+                $ruta_elegida = 'vistas/buscar.php';
+                break;
         }
     }elseif(count($partes_ruta) == 3){
         if($partes_ruta[1]== 'registro_correcto'){

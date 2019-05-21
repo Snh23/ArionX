@@ -176,4 +176,27 @@ class RepositorioUsuario
         }
         return $usuario;
     }
+
+    public static function actualizar_pass($conexion, $id_usuario, $nueva_clave){
+        $actualiza_correcta = false;
+        if(isset($conexion)){
+            try{
+                $sql= "UPDATE usuarios SET password = :password where id = :id";
+                $sentencia = $conexion -> prepare($sql);
+                $sentencia -> bindValue(':password', $nueva_clave, PDO::PARAM_STR);
+                $sentencia -> bindValue(':id', $id_usuario, PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                $resultado = $sentencia -> rowCount();
+                if(count($resultado)){
+                    $actualiza_correcta = true;
+                }else{
+                    $actualiza_correcta = false;
+                }
+            }catch(PDOException $ex){
+                print 'ERROR' . $ex -> getMessage();
+            }
+            return $actualiza_correcta;
+        }
+    }
 }

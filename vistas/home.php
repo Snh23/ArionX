@@ -1,5 +1,5 @@
 <?php
-$titulo='Blog de Arion';
+$titulo = 'Blog de Arion';
 include_once 'app/conexion.inc.php';
 include_once 'app/repusuario.inc.php';
 include_once 'app/escritorentradas.inc.php';
@@ -23,10 +23,12 @@ include_once 'Plantillas/documento-nav.inc.php';
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Busqueda
                         </div>
                         <div class="panel-body">
-                            <div class="form-group">
-                                <input type="search" class="form-control" placeholder="¿Que Buscas?">
-                            </div>
-                            <button class="form-control">Buscar</button>
+                            <form role="form" method="post" action="<?php echo RUTA_BUSCAR ?>">
+                                <div class="form-group">
+                                    <input class="form-control" name="termino-buscar" type="search" class="form-control" placeholder="¿Que Buscas?" required>
+                                </div>
+                                <button type="submit" name="buscar" class="form-control btn btn-primary">Buscar</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -58,8 +60,8 @@ include_once 'Plantillas/documento-nav.inc.php';
         </div>
         <div class="col-md-8">
             <?php
-EscritorEntradas::escribir_entradas();
-?>
+            EscritorEntradas::escribir_entradas();
+            ?>
         </div>
     </div>
 </div>
