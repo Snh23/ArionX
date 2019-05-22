@@ -5,23 +5,96 @@ $resultados = null;
 
 $resultados_multiples = null;
 
+$buscar_titulo = false;
+$buscar_contenido = false;
+$buscar_tags = false;
+$buscar_usuario = false;
+
+$buscar_antiguas = false;
+
 if (isset($_POST['buscar']) && ($_POST['termino-buscar']) && !empty($_POST['termino-buscar'])) {
     $busqueda = $_POST['termino-buscar'];
     $resultados_multiples = false;
 
     Conexion::abrir_con();
-    $resultados = RepositorioEntrada::buscar_entradas_todos_campos(Conexion::obtener_con(), $busqueda);
+    $resultados = RepositorioEntrada::buscar_entradas_todos_campos(Conexion::obtener_con(), $busqueda, $orden);
     //if (isset($resultados)) { //con esto checamos que devolvemos resultados
     //print_r($resultados);
     //}
     Conexion::cerrar_con();
 }
 
-if (isset($_POST['buscarA']) && ($_POST['termino-buscar']) && !empty($_POST['termino-buscar'])) {
-    $busqueda = $_POST['termino-buscar'];
-    $resultados_multiples = true;
-    //print_r($_POST['campos']); //nos sirve para mostrar si la consulta esta funcionando
-    //echo ($_POST['fecha']);
+if (isset($_POST['buscarA']) && isset($_POST['campos'])) {
+
+    if (in_array("titulo", $_POST['campos'])) {
+        $buscar_titulo = true;
+    }
+    if (in_array("contenido", $_POST['campos'])) {
+        $buscar_contenido = true;
+    }
+    if (in_array("tags", $_POST['campos'])) {
+        $buscar_tags = true;
+    }
+    if (in_array("usuario", $_POST['campos'])) {
+        $buscar_usuario = true;
+    }
+
+    if ($_POST['fecha'] == 'recientes') {
+        $orden = "DESC";
+    } else {
+        $orden = "ASC";
+    }
+
+    if (($_POST['termino-buscar']) && !empty($_POST['termino-buscar'])) {
+        $busqueda = $_POST['termino-buscar'];
+        $resultados_multiples = true;
+
+        Conexion::abrir_con();
+
+        if ($buscar_titulo) {
+            $entradas_por_titulo = RepositorioEntrada::buscar_entradas_por_titulo(Conexion::obtener_con(), $busqueda, $orden);
+            print_r($entradas_por_titulo);
+            ?>
+            <br>
+            <br>
+        <?php
+    }
+    if ($buscar_contenido) {
+        $entradas_por_contenido = RepositorioEntrada::buscar_entradas_por_texto(Conexion::obtener_con(), $busqueda, $orden);
+        print_r($entradas_por_contenido);
+        ?>
+            <br>
+            <br>
+        <?php
+    }
+    if ($buscar_tags) {
+        echo "Aun no esta Implementado";
+        ?>
+            <br>
+            <br>
+        <?php
+    }
+    if ($buscar_usuario) {
+        $entradas_por_usuario = RepositorioEntrada::buscar_entradas_por_autor(Conexion::obtener_con(), $busqueda, $orden);
+        print_r($entradas_por_usuario);
+        ?>
+            <br>
+            <br>
+        <?php
+    }
+    print_r($_POST['campos']); //nos sirve para mostrar si la consulta esta funcionando
+    ?>
+        <br>
+        <br>
+        <?php
+
+        echo ($_POST['fecha']);
+        ?>
+        <br>
+        <br>
+    <?php
+
+}
 }
 $titulo = "Buscar en Arion";
 include_once 'Plantillas/documento-declaracion.inc.php';
@@ -66,25 +139,66 @@ include_once 'Plantillas/documento-nav.inc.php';
                             </div>
                             <p>Buscar en los siguientes campos:</p>
                             <label class="checkbox-inline">
-                                <input type="checkbox" name="campos[]" value="titulo" checked>Titulo
-                                <!--almacenamos el valos de cada checkbox en el nombre campos con los corchetes-->
+                                <!--almacenamos el valor de cada checkbox en el nombre campos con los corchetes-->
+                                <input type="checkbox" name="campos[]" value="titulo" <?php
+                                                                                        if (isset($_POST['buscarA'])) {
+                                                                                            if ($buscar_titulo) {
+                                                                                                echo "checked";
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo "checked";
+                                                                                        }
+                                                                                        ?>>Titulo
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" name="campos[]" value="contenido" checked>Contenido
+                                <input type="checkbox" name="campos[]" value="contenido" <?php
+                                                                                            if (isset($_POST['buscarA'])) {
+                                                                                                if ($buscar_contenido) {
+                                                                                                    echo "checked";
+                                                                                                }
+                                                                                            } else {
+                                                                                                echo "checked";
+                                                                                            }
+                                                                                            ?>>Contenido
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" name="campos[]" value="tags" checked>Tags
+                                <input type="checkbox" name="campos[]" value="tags" <?php
+                                                                                    if (isset($_POST['buscarA'])) {
+                                                                                        if ($buscar_tags) {
+                                                                                            echo "checked";
+                                                                                        }
+                                                                                    } else {
+                                                                                        echo "checked";
+                                                                                    }
+                                                                                    ?>>Tags
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" name="campos[]" value="auor">Autor
+                                <input type="checkbox" name="campos[]" value="usuario" <?php
+                                                                                        if (isset($_POST['buscarA'])) {
+                                                                                            if ($buscar_usuario) {
+                                                                                                echo "checked";
+                                                                                            }
+                                                                                        }
+                                                                                        ?>>Autor
                             </label>
                             <hr>
-                            <p>Ordenar oir:</p>
+                            <p>Ordenar por:</p>
                             <label class="radio-inline">
-                                <input type="radio" name="fecha" value="recientes" checked>Entradas mas recientes
+                                <input type="radio" name="fecha" value="recientes" <?php
+                                                                                    if (isset($_POST['buscarA']) && isset($orden) && $orden == 'DESC') {
+                                                                                        echo "checked";
+                                                                                    }
+                                                                                    if (!isset($_POST['buscarA'])) {
+                                                                                        echo "checked";
+                                                                                    }
+                                                                                    ?>>Entradas mas recientes
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="fecha" value="antiguas">Entradas mas antiguas
+                                <input type="radio" name="fecha" value="antiguas" <?php
+                                                                                    if (isset($_POST['buscarA']) && isset($orden) && $orden == 'ASC') {
+                                                                                        echo "checked";
+                                                                                    }
+                                                                                    ?>>Entradas mas antiguas
                             </label>
                             <hr>
                             <button type="submit" name="buscarA" class="btn btn-primary btn-buscar">Busqueda
@@ -104,12 +218,15 @@ include_once 'Plantillas/documento-nav.inc.php';
                 <h1>
                     Resultados
                     <?php
-                    if (!is_null($resultados)) {
-                        echo '<small>' . count($resultados) . ' resultados</small>';
-                    } else {
-                        echo '<small>0 resultados</small>';
-                    }
-                    ?>
+                    if (isset($_POST['buscar']) && count($resultados) > 0) {
+                        echo " ";
+                        ?>
+                        <small><?php echo count($resultados); ?></small>
+                    <?php
+                } else if (isset($_POST['buscarA'])) {
+                    //pendiente
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -118,10 +235,7 @@ include_once 'Plantillas/documento-nav.inc.php';
         if (!$resultados_multiples) {
             EscritorEntradas::mostrar_entradas_busqueda($resultados);
         } else {
-            //mostrar rsultados
-        }
-    } else {
-        //temporal. mover al bloque else mas arriba
+            echo 'mas de una respuesta';
         $parametros = count($_POST['campos']);
         $ancho_columnas = 12 / $parametros;
         ?>
@@ -133,11 +247,17 @@ include_once 'Plantillas/documento-nav.inc.php';
                     <h4><?php echo 'Coincidencias en ' . $_POST['campos'][$i]; ?></h4>
                 </div>
             <?php
-            }
-            ?>
+        }
+        ?>
         </div>
         <!--<p>NO existen coincidencias</p>-->
     <?php
+        }
+    } else {
+        ?>
+    <h3>Sin coincidencias</h3>
+    <br>
+        <?php
 }
 ?>
 </div>

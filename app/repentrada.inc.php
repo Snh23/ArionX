@@ -142,7 +142,9 @@ class RepositorioEntrada
         $total_entradas = '0';
         if (isset($conexion)) {
             try {
-                $sql = "SELECT COUNT(*) AS total_entradas FROM entradas Where autor_id = :autor_id AND activa= 1";
+                $sql = "SELECT COUNT(*) AS total_entradas 
+                FROM entradas 
+                Where autor_id = :autor_id AND activa= 1";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindValue(':autor_id', $usuario_id, PDO::PARAM_STR);
                 $sentencia->execute();
@@ -160,7 +162,9 @@ class RepositorioEntrada
         $total_entradas = '0';
         if (isset($conexion)) {
             try {
-                $sql = "SELECT COUNT(*) AS total_entradas FROM entradas Where autor_id = :autor_id AND activa= 0";
+                $sql = "SELECT COUNT(*) AS total_entradas 
+                FROM entradas 
+                Where autor_id = :autor_id AND activa= 0";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindValue(':autor_id', $usuario_id, PDO::PARAM_STR);
                 $sentencia->execute();
@@ -217,7 +221,8 @@ class RepositorioEntrada
         $titulo_existe = true;
         if(isset($conexion)){
             try{
-                $sql = "SELECT * FROM entradas WHERE titulo = :titulo";
+                $sql = "SELECT * FROM entradas 
+                WHERE titulo = :titulo";
                 $sentencia = $conexion -> prepare($sql);
                 $sentencia -> bindValue(':titulo', PDO::PARAM_STR);
                 $sentencia -> execute();
@@ -239,7 +244,8 @@ class RepositorioEntrada
         $titulo_existe = true;
         if(isset($conexion)){
             try{
-                $sql = "SELECT * FROM entradas WHERE url = :url";
+                $sql = "SELECT * FROM entradas 
+                WHERE url = :url";
                 $sentencia = $conexion -> prepare($sql);
                 $sentencia -> bindValue(':url', PDO::PARAM_STR);
                 $sentencia -> execute();
@@ -261,7 +267,8 @@ class RepositorioEntrada
         if(isset($conexion)){
             try{
                 $conexion -> beginTransaction();
-                $sql1 = "DELETE FROM comentarios WHERE entrada_id = :entrada_id";
+                $sql1 = "DELETE FROM comentarios 
+                WHERE entrada_id = :entrada_id";
                 $sentencia1 = $conexion -> prepare($sql1);
                 $sentencia1 -> bindValue(':entrada_id', $entrada_id, PDO::PARAM_STR);
                 $sentencia1 -> execute();
@@ -283,7 +290,9 @@ class RepositorioEntrada
         $actualizacion_correcta = false;
         if(isset($conexion)){
             try{
-                $sql ="UPDATE entradas SET titulo = :titulo, url = :url, texto = :texto, activa = :activa WHERE id = :id";
+                $sql ="UPDATE entradas 
+                SET titulo = :titulo, url = :url, texto = :texto, activa = :activa 
+                WHERE id = :id";
                 $sentencia = $conexion -> prepare($sql);
                 $sentencia -> bindValue(':titulo', $titulo, PDO::PARAM_STR);
                 $sentencia -> bindValue(':url', $url, PDO::PARAM_STR);
@@ -306,7 +315,7 @@ class RepositorioEntrada
         return $actualizacion_correcta;
     }
 
-    public static function buscar_entradas_todos_campos($conexion, $termino_busqueda){
+    public static function buscar_entradas_todos_campos($conexion, $termino_busqueda, $orden){
         $entradas =[];
         $termino_busqueda = '%' . $termino_busqueda . '%';
         if(isset($conexion)){
@@ -315,9 +324,109 @@ class RepositorioEntrada
                 $sql = "SELECT * FROM entradas 
                         WHERE titulo LIKE :busqueda 
                         OR texto LIKE :busqueda 
-                        ORDER BY fecha DESC LIMIT 25";
+                        ORDER BY fecha $orden LIMIT 25";
                 $sentencia = $conexion -> prepare($sql);
                 $sentencia -> bindValue(':busqueda', $termino_busqueda, PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                $resultado = $sentencia -> fetchAll();
+                if(count($resultado)){
+                    foreach($resultado as $fila){
+                        $entradas[] = new Entrada(
+                            $fila['id'], 
+                            $fila['autor_id'], 
+                            $fila['titulo'], 
+                            $fila['url'], 
+                            $fila['texto'], 
+                            $fila['fecha'], 
+                            $fila['activa']
+                        );
+                    }
+                }
+            }catch(PDOException $ex){
+                print 'ERROR' . $ex -> getMessage();
+            }
+            return $entradas;
+        }
+    }
+    public static function buscar_entradas_por_titulo($conexion, $termino_busqueda, $orden){
+        $entradas =[];
+        $termino_busqueda = '%' . $termino_busqueda . '%';
+        if(isset($conexion)){
+            try{
+                //podemos condicionar a que solo muestre las entradas activas
+                $sql = "SELECT * FROM entradas 
+                        WHERE titulo LIKE :busqueda 
+                        ORDER BY fecha $orden LIMIT 25";
+                $sentencia = $conexion -> prepare($sql);
+                $sentencia -> bindValue(':busqueda', $termino_busqueda, PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                $resultado = $sentencia -> fetchAll();
+                if(count($resultado)){
+                    foreach($resultado as $fila){
+                        $entradas[] = new Entrada(
+                            $fila['id'], 
+                            $fila['autor_id'], 
+                            $fila['titulo'], 
+                            $fila['url'], 
+                            $fila['texto'], 
+                            $fila['fecha'], 
+                            $fila['activa']
+                        );
+                    }
+                }
+            }catch(PDOException $ex){
+                print 'ERROR' . $ex -> getMessage();
+            }
+            return $entradas;
+        }
+    }
+    public static function buscar_entradas_por_texto($conexion, $termino_busqueda, $orden){
+        $entradas =[];
+        $termino_busqueda = '%' . $termino_busqueda . '%';
+        if(isset($conexion)){
+            try{
+                //podemos condicionar a que solo muestre las entradas activas
+                $sql = "SELECT * FROM entradas 
+                        WHERE texto LIKE :busqueda 
+                        ORDER BY fecha $orden LIMIT 25";
+                $sentencia = $conexion -> prepare($sql);
+                $sentencia -> bindValue(':busqueda', $termino_busqueda, PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                $resultado = $sentencia -> fetchAll();
+                if(count($resultado)){
+                    foreach($resultado as $fila){
+                        $entradas[] = new Entrada(
+                            $fila['id'], 
+                            $fila['autor_id'], 
+                            $fila['titulo'], 
+                            $fila['url'], 
+                            $fila['texto'], 
+                            $fila['fecha'], 
+                            $fila['activa']
+                        );
+                    }
+                }
+            }catch(PDOException $ex){
+                print 'ERROR' . $ex -> getMessage();
+            }
+            return $entradas;
+        }
+    }
+    public static function buscar_entradas_por_autor($conexion, $termino_busqueda, $orden){
+        $entradas =[];
+        $autor = '%' . $termino_busqueda . '%';
+        if(isset($conexion)){
+            try{
+                //podemos condicionar a que solo muestre las entradas activas
+                $sql = "SELECT * FROM entradas e 
+                JOIN usuarios u ON u.id = e.autor_id 
+                WHERE u.usuario LIKE :autor 
+                ORDER BY e.fecha $orden LIMIT 25";
+                $sentencia = $conexion -> prepare($sql);
+                $sentencia -> bindValue(':autor', $autor, PDO::PARAM_STR);
                 $sentencia -> execute();
 
                 $resultado = $sentencia -> fetchAll();
