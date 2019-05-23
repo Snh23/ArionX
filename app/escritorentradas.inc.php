@@ -21,36 +21,35 @@ class EscritorEntradas
             return;
         }
         ?>
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <?php
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <?php
                     echo $entrada->get_titulo();
                     ?>
-            </div>
-            <div class="panel-body">
-                <p>
-                    <strong>
-                        <?php
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <strong>
+                            <?php
                             echo $entrada->get_fecha();
                             ?>
-                    </strong>
-                </p>
-                <div class="hyphenation text-justify">
-                    <?php
+                        </strong>
+                    </p>
+                    <div class="hyphenation text-justify">
+                        <?php
                         echo nl2br(self::resumir_texto($entrada->get_texto()));
                         ?>
-                </div>
-                <br>
-                <div class="text-right">
-                    <a class="btn btn-primary" href="<?php echo RUTA_ENTRADA . "/" . $entrada->get_url() ?>"
-                        role="button">Seguir Leyendo</a>
+                    </div>
+                    <br>
+                    <div class="text-right">
+                        <a class="btn btn-primary" href="<?php echo RUTA_ENTRADA . "/" . $entrada->get_url() ?>" role="button">Seguir Leyendo</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <?php
 }
 
@@ -59,15 +58,15 @@ public static function mostrar_entradas_busqueda($entradas)
     for ($i = 1; $i <= count($entradas); $i++) {
         if ($i % 3 == 0) {
             ?>
-<div class="row">
-    <?php
+            <div class="row">
+            <?php
         }
         $entrada = $entradas[$i - 1];
         self::mostrar_entrada($entrada);
         if ($i % 3 == 0) {
             ?>
-</div>
-<?php
+            </div>
+        <?php
     }
 }
 }
@@ -79,34 +78,33 @@ public static function mostrar_entrada($entrada)
     }
     ?>
 
-<div class="col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <?php
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php
                 echo $entrada->get_titulo();
                 ?>
-        </div>
-        <div class="panel-body">
-            <p>
-                <strong>
-                    <?php
+            </div>
+            <div class="panel-body">
+                <p>
+                    <strong>
+                        <?php
                         echo $entrada->get_fecha();
                         ?>
-                </strong>
-            </p>
-            <div class="hyphenation text-justify">
-                <?php
+                    </strong>
+                </p>
+                <div class="hyphenation text-justify">
+                    <?php
                     echo nl2br(self::resumir_texto($entrada->get_texto()));
                     ?>
-            </div>
-            <br>
-            <div class="text-right">
-                <a class="btn btn-primary" href="<?php echo RUTA_ENTRADA . "/" . $entrada->get_url() ?>"
-                    role="button">Seguir Leyendo</a>
+                </div>
+                <br>
+                <div class="text-right">
+                    <a class="btn btn-primary" href="<?php echo RUTA_ENTRADA . "/" . $entrada->get_url() ?>" role="button">Seguir Leyendo</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 <?php
 }
 
@@ -126,5 +124,57 @@ public function resumir_texto($texto)
     }
     return $resultado;
 }
+
+public static function mostrar_entradas_busqueda_multiple($entradas)
+{
+    for ($i = 0; $i < count($entradas); $i++) {
+        ?>
+        <div class="row">
+            <?php
+            $entrada = $entradas[$i];
+            self::mostrar_entrada_multiple($entrada);
+                ?>
+            </div>
+        <?php
+}
+}
+
+public static function mostrar_entrada_multiple($entrada)
+{
+    if (!isset($entrada)) {
+        return;
+    }
+    ?>
+
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php
+                echo $entrada->get_titulo();
+                ?>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <strong>
+                        <?php
+                        echo $entrada->get_fecha();
+                        ?>
+                    </strong>
+                </p>
+                <div class="hyphenation text-justify">
+                    <?php
+                    echo nl2br(self::resumir_texto($entrada->get_texto()));
+                    ?>
+                </div>
+                <br>
+                <div class="text-right">
+                    <a class="btn btn-primary" href="<?php echo RUTA_ENTRADA . "/" . $entrada->get_url() ?>" role="button">Seguir Leyendo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
+}
+
 }
 ?>

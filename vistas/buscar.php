@@ -1,9 +1,10 @@
 <?php
 include_once 'app/escritorentradas.inc.php';
+include_once 'Plantillas/documento-declaracion.inc.php';
+include_once 'Plantillas/documento-nav.inc.php';
+
 $busqueda = null;
 $resultados = null;
-
-$resultados_multiples = null;
 
 $buscar_titulo = false;
 $buscar_contenido = false;
@@ -14,8 +15,7 @@ $buscar_antiguas = false;
 
 if (isset($_POST['buscar']) && ($_POST['termino-buscar']) && !empty($_POST['termino-buscar'])) {
     $busqueda = $_POST['termino-buscar'];
-    $resultados_multiples = false;
-
+    $orden = 'DESC';
     Conexion::abrir_con();
     $resultados = RepositorioEntrada::buscar_entradas_todos_campos(Conexion::obtener_con(), $busqueda, $orden);
     //if (isset($resultados)) { //con esto checamos que devolvemos resultados
@@ -47,7 +47,6 @@ if (isset($_POST['buscarA']) && isset($_POST['campos'])) {
 
     if (($_POST['termino-buscar']) && !empty($_POST['termino-buscar'])) {
         $busqueda = $_POST['termino-buscar'];
-        $resultados_multiples = true;
 
         Conexion::abrir_con();
 
@@ -97,8 +96,6 @@ if (isset($_POST['buscarA']) && isset($_POST['campos'])) {
 }
 }
 $titulo = "Buscar en Arion";
-include_once 'Plantillas/documento-declaracion.inc.php';
-include_once 'Plantillas/documento-nav.inc.php';
 ?>
 <div class="container">
     <div class="row">
@@ -218,46 +215,66 @@ include_once 'Plantillas/documento-nav.inc.php';
                 <h1>
                     Resultados
                     <?php
-                    if (isset($_POST['buscar']) && count($resultados) > 0) {
+                    if (isset($_POST['buscar']) && count($resultados)) {
                         echo " ";
+
                         ?>
                         <small><?php echo count($resultados); ?></small>
                     <?php
-                } else if (isset($_POST['buscarA'])) {
-                    //pendiente
                 }
                 ?>
             </div>
         </div>
     </div>
     <?php
-    if (!is_null($resultados)) {
-        if (!$resultados_multiples) {
+    if (isset($_POST['buscar'])) {
+        if (count($resultados)) {
             EscritorEntradas::mostrar_entradas_busqueda($resultados);
         } else {
-            echo 'mas de una respuesta';
+            ?>
+            <h3>Sin coincidencias</h3>
+        <?php
+    }
+} else if (isset($_POST['buscarA'])) {
+    if (count($entradas_por_titulo) || count($entradas_por_contenido) || count($entradas_por_usuario)) {
         $parametros = count($_POST['campos']);
         $ancho_columnas = 12 / $parametros;
         ?>
-        <div class="row">
-            <?php
-            for ($i = 0; $i < $parametros; $i++) {
-                ?>
-                <div class="<?php echo 'col-md-' . $ancho_columnas; ?> text-center">
-                    <h4><?php echo 'Coincidencias en ' . $_POST['campos'][$i]; ?></h4>
-                </div>
-            <?php
-        }
-        ?>
-        </div>
-        <!--<p>NO existen coincidencias</p>-->
-    <?php
-        }
-    } else {
-        ?>
-    <h3>Sin coincidencias</h3>
-    <br>
+            <div class="row">
+                <?php
+                for ($i = 0; $i < $parametros; $i++) {
+                    ?>
+                    <div class="<?php echo 'col-md.' . $ancho_columnas; ?> text-center">
+                        <h4><?php echo 'Coincidencias en ' . $_POST['campos'][$i]; ?></h4>
+                        <br>
+                        <?php
+                        switch ($_POST['campos'][$i]) {
+                            case "titulo";
+                                EscritorEntradas::mostrar_entradas_busqueda_multiple($entradas_por_titulo);
+                                break;
+                            case "contenido";
+                                EscritorEntradas::mostrar_entradas_busqueda_multiple($entradas_por_contenido);
+                                break;
+                            case "usuario";
+                                EscritorEntradas::mostrar_entradas_busqueda_multiple($entradas_por_usuario);
+                                break;
+                            case "tags";
+
+                                break;
+                        }
+                        ?>
+                    </div>
+                <?php
+            }
+            ?>
+            </div>
         <?php
+    } else{
+        ?>
+        <h3>Sin coincidencias</h3>
+        <br>
+        <?php
+    }
 }
 ?>
 </div>
