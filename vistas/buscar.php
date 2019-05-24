@@ -54,43 +54,43 @@ if (isset($_POST['buscarA']) && isset($_POST['campos'])) {
             $entradas_por_titulo = RepositorioEntrada::buscar_entradas_por_titulo(Conexion::obtener_con(), $busqueda, $orden);
             //print_r($entradas_por_titulo);
             //?>
-            //<br>
-            //<br>
+            /*<br>
+            <br>*/
         //<?php
     }
     if ($buscar_contenido) {
         $entradas_por_contenido = RepositorioEntrada::buscar_entradas_por_texto(Conexion::obtener_con(), $busqueda, $orden);
         //print_r($entradas_por_contenido);
         //?>
-            //<br>
-            //<br>
+            /*<br>
+            <br>*/
         //<?php
     }
     if ($buscar_tags) {
         //echo "Aun no esta Implementado";
         //?>
-            //<br>
-            //<br>
+            /*<br>
+            <br>*/
         //<?php
     }
     if ($buscar_usuario) {
         $entradas_por_usuario = RepositorioEntrada::buscar_entradas_por_autor(Conexion::obtener_con(), $busqueda, $orden);
         //print_r($entradas_por_usuario);
         //?>
-            //<br>
-            //<br>
+            /*<br>
+            <br>*/
         //<?php
     }
     //print_r($_POST['campos']); //nos sirve para mostrar si la consulta esta funcionando
     //?>
-        //<br>
-        //<br>
+        /*<br>
+        <br>*/
         //<?php
 
         //echo ($_POST['fecha']);
         //?>
-        //<br>
-        //<br>
+        /*<br>
+        <br>*/
     //<?php
 
 }
