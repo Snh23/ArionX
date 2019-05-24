@@ -52,46 +52,46 @@ if (isset($_POST['buscarA']) && isset($_POST['campos'])) {
 
         if ($buscar_titulo) {
             $entradas_por_titulo = RepositorioEntrada::buscar_entradas_por_titulo(Conexion::obtener_con(), $busqueda, $orden);
-            print_r($entradas_por_titulo);
-            ?>
-            <br>
-            <br>
-        <?php
+            //print_r($entradas_por_titulo);
+            //?>
+            //<br>
+            //<br>
+        //<?php
     }
     if ($buscar_contenido) {
         $entradas_por_contenido = RepositorioEntrada::buscar_entradas_por_texto(Conexion::obtener_con(), $busqueda, $orden);
-        print_r($entradas_por_contenido);
-        ?>
-            <br>
-            <br>
-        <?php
+        //print_r($entradas_por_contenido);
+        //?>
+            //<br>
+            //<br>
+        //<?php
     }
     if ($buscar_tags) {
-        echo "Aun no esta Implementado";
-        ?>
-            <br>
-            <br>
-        <?php
+        //echo "Aun no esta Implementado";
+        //?>
+            //<br>
+            //<br>
+        //<?php
     }
     if ($buscar_usuario) {
         $entradas_por_usuario = RepositorioEntrada::buscar_entradas_por_autor(Conexion::obtener_con(), $busqueda, $orden);
-        print_r($entradas_por_usuario);
-        ?>
-            <br>
-            <br>
-        <?php
+        //print_r($entradas_por_usuario);
+        //?>
+            //<br>
+            //<br>
+        //<?php
     }
-    print_r($_POST['campos']); //nos sirve para mostrar si la consulta esta funcionando
-    ?>
-        <br>
-        <br>
-        <?php
+    //print_r($_POST['campos']); //nos sirve para mostrar si la consulta esta funcionando
+    //?>
+        //<br>
+        //<br>
+        //<?php
 
-        echo ($_POST['fecha']);
-        ?>
-        <br>
-        <br>
-    <?php
+        //echo ($_POST['fecha']);
+        //?>
+        //<br>
+        //<br>
+    //<?php
 
 }
 }
@@ -236,7 +236,7 @@ $titulo = "Buscar en Arion";
         <?php
     }
 } else if (isset($_POST['buscarA'])) {
-    if (count($entradas_por_titulo) || count($entradas_por_contenido) || count($entradas_por_usuario)) {
+    if (!is_null($entradas_por_titulo) || !is_null($entradas_por_contenido) || !is_null($entradas_por_usuario)) {
         $parametros = count($_POST['campos']);
         $ancho_columnas = 12 / $parametros;
         ?>
@@ -244,7 +244,7 @@ $titulo = "Buscar en Arion";
                 <?php
                 for ($i = 0; $i < $parametros; $i++) {
                     ?>
-                    <div class="<?php echo 'col-md.' . $ancho_columnas; ?> text-center">
+                    <div class="<?php echo 'col-md-' . $ancho_columnas; ?> text-center">
                         <h4><?php echo 'Coincidencias en ' . $_POST['campos'][$i]; ?></h4>
                         <br>
                         <?php
